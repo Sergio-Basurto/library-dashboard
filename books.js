@@ -1,6 +1,17 @@
 function findAuthorById(authors, id) {
   return authors.find((author) => author.id === id);
 }
+//  usage of the helper function in another function
+function getBooksWithAuthorInfo(account, books, authors) {
+  const booksWithAuthorInfo = [];
+  for (const borrow of account.borrows) {
+    const book = books.find((book) => book.id === borrow.id);
+    const author = findAuthorById(authors, book.authorId);
+    const bookWithAuthorInfo = { ...book, author };
+    booksWithAuthorInfo.push(bookWithAuthorInfo);
+  }
+  return booksWithAuthorInfo;
+}
 
 function findBookById(books, id) {
   return books.find((book) => book.id === id);
